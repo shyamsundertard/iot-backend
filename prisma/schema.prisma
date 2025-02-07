@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SensorData {
+  id          Int      @id @default(autoincrement())
+  temperature Float
+  humidity    Float
+  timestamp   DateTime @default(now())
+}
+
+model PIRStatus {
+  id             Int      @id @default(autoincrement())
+  motionDetected Boolean
+  timestamp      DateTime @default(now())
+
+  @@map("pir_status")
+}
+
+model RelayStatus {
+  id        Int     @id @default(autoincrement())
+  relay1    Boolean @default(false)
+  relay2    Boolean @default(false)
+  relay3    Boolean @default(false)
+  relay4    Boolean @default(false)
+
+  @@map("relay_status")
+}
