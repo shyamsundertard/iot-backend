@@ -7,16 +7,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model SensorData {
+model DHTSensorData {
   id          Int      @id @default(autoincrement())
   temperature Float
   humidity    Float
   timestamp   DateTime @default(now())
 }
 
+model MPUSensorData {
+  id          Int     @id @default(autoincrement())
+  accelX      Float
+  accelY      Float
+  accelZ      Float
+  gyroX       Float
+  gyroY       Float
+  gyroZ       Float
+  timestamp   DateTime @default(now())
+}
+
 model PIRStatus {
   id             Int      @id @default(autoincrement())
-  motionDetected Boolean
+  motionDetected Boolean  @default(false)
   timestamp      DateTime @default(now())
 
   @@map("pir_status")
@@ -30,4 +41,12 @@ model RelayStatus {
   relay4    Boolean @default(false)
 
   @@map("relay_status")
+}
+
+model MPU6050 {
+  id        String  @id @default(uuid())
+  accX      Float
+  accY      Float
+  accZ      Float
+  createdAt DateTime @default(now())
 }
