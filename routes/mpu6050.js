@@ -2,6 +2,16 @@ import express from "express";
 import prisma from "../lib/prisma.js";
 const router = express.Router();
 
+async function initializeMPU6050() {
+  const mpu6050data = await prisma.mPU6050.findFirst();
+  if (!mpu6050data) {
+    await prisma.mPU6050.create({
+      data: { accX: 1, accY: 2, accZ: 3 }
+    });
+  }
+}
+initializeMPU6050();
+
 // Endpoint to receive MPU6050 data
 router.post("/", async (req, res) => {
   try {
