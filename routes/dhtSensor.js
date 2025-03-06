@@ -29,12 +29,6 @@ router.post('/', async (req, res) => {
       data: { temperature, humidity }
     });
 
-    // Auto-toggle relay1 based on temperature
-    const relay1Status = temperature > 20.0;
-    await prisma.relayStatus.updateMany({
-      data: { relay1: relay1Status }
-    });
-
     res.json(sensorData);
   } catch (error) {
     res.status(500).json({ error: error.message });
