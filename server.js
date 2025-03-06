@@ -5,6 +5,7 @@ import pirRoutes from './routes/pirSensor.js';
 import relayRoutes from './routes/relays.js';
 import mpuRoutes from './routes/mpuSensor.js';
 import mpu6050Routes from "./routes/mpu6050.js"
+import ultrasonicRoutes from "./routes/ultrasonicSensor.js"
 
 const app = express();
 app.use(cors({
@@ -20,7 +21,7 @@ app.use('/pir', pirRoutes);
 app.use('/relays', relayRoutes);
 app.use('/mpu', mpuRoutes);
 app.use("/mpu6050", mpu6050Routes);
-
+app.use("/ultrasonic", ultrasonicRoutes);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
