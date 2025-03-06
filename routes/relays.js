@@ -27,10 +27,10 @@ router.get('/', async (req, res) => {
 // POST: Update Relay States
 router.post('/', async (req, res) => {
   try {
-    const { relay2, relay3, relay4 } = req.body;
+    const { relay1, relay2, relay3, relay4 } = req.body;
 
     const updatedStatus = await prisma.relayStatus.updateMany({
-      data: { relay2, relay3, relay4 }
+      data: { relay1, relay2, relay3, relay4 }
     });
 
     res.json(updatedStatus);
